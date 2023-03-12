@@ -2,7 +2,13 @@ package rocks.zipcodewilmington;
 
 import org.junit.Assert;
 import org.junit.Test;
+import rocks.zipcodewilmington.animals.Animal;
 import rocks.zipcodewilmington.animals.Dog;
+import rocks.zipcodewilmington.animals.Mammal;
+
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 
 /**
  * @author leon on 4/19/18.
@@ -28,4 +34,55 @@ public class DogTest {
         String dogName = dog.getName();
         Assert.assertEquals(dogName, givenName);
     }
+
+    @Test
+    public void newDogTest() {
+        String expectedName = "Sage";
+        Dog dog = new Dog( expectedName, null, null);
+        Assert.assertEquals(dog.getName(), expectedName);
+    }
+
+    @Test
+    public void speakTest() {
+        String expectedResult = "bark!";
+        Dog dog = new Dog(null, null, null);
+        String actualResult = dog.speak();
+        Assert.assertEquals(actualResult, expectedResult);
+    }
+
+    @Test
+    public void setBirthDateTest(){
+        Dog dog = new Dog(null, null, null);
+        LocalDate date = LocalDate.of(2010, 11, 1);
+        Date expectedBirthDate = Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        dog.setBirthDate(expectedBirthDate);
+        Date actualResult = dog.getBirthDate();
+        Assert.assertEquals(actualResult, expectedBirthDate);
+    }
+
+    @Test
+    public void eatTest(){
+    Dog dog = new Dog(null, null, null);
+    Food food = new Food();
+    dog.eat(food);
+    }
+
+    @Test
+    public void getIdTest() {
+    Dog dog = new Dog(null, null, 234);
+    int getID = dog.getId();
+    Assert.assertEquals(getID,234);
+    }
+
+    @Test
+    public void checkAnimalInheritance(){
+        Dog dog = new Dog(null, null, null );
+        assert dog instanceof Animal;
+    }
+    @Test
+    public void checkMammalInheritance(){
+        Dog dog = new Dog(null, null, null );
+         assert dog instanceof Mammal;
+    }
+
 }
